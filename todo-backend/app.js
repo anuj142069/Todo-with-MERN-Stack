@@ -28,6 +28,7 @@ mongoose.connect(DB_PATH).then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on address http://localhost:${PORT}`);
   });
-}).catch(err => {
-  console.log('Error while connecting to Mongo: ', err);
-});
+})
+//   .catch(err => {
+//   console.log('Error while connecting to Mongo: ', err);
+// });
