@@ -21,7 +21,7 @@ app.use("/api/todo", todoItemsRouter);
 
 app.use(errorsController.pageNotFound);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 mongoose.connect(DB_PATH).then(() => {
   app.listen(PORT);
