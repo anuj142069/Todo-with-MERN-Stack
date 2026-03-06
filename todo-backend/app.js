@@ -5,7 +5,7 @@ const path = require('path');
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const cors = require('cors');
-
+const DB_PATH = "mongodb+srv://user:anuj142069@cluster0.mryid43.mongodb.net/todo";
 
 //Local Module
 const todoItemsRouter = require("./routes/todoItemsRouter")
@@ -24,7 +24,7 @@ app.use(errorsController.pageNotFound);
 const PORT = 3001;
 
 mongoose.connect(DB_PATH).then(() => {
-  console.log('Connected to Mongo');
+  // console.log('Connected to Mongo');
   app.listen(PORT, () => {
     console.log(`Server running on address http://localhost:${PORT}`);
   });
