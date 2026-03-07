@@ -21,12 +21,13 @@ app.use("/api/todo", todoItemsRouter);
 
 app.use(errorsController.pageNotFound);
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
 mongoose.connect(DB_PATH).then(() => {
   // console.log('Connected to Mongo');
-  app.listen(PORT);
-})
-// .catch(err => {
-  // console.log('Error while connecting to Mongo: ', err);
-// });
+  app.listen(PORT, () => {
+    console.log(`Server running on address http://localhost:${PORT}`);
+  });
+}).catch(err => {
+  console.log('Error while connecting to Mongo: ', err);
+});
