@@ -17,17 +17,42 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
+let isConnectedToMongo = false;
+
+async function connectToMongo() {
+  try {
+    await mongoose.connect(process.env.DB_PATH, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }); 
+    isConnectedToMongo = true;
+    console.log('Connected to Mongo');
+  }catch (err) {
+    console.log('Error while connecting to Mongo: ', err);
+    // setTimeout(connectToMongo, 5000);
+  }
+}
+
+app.use((req, res, next) => {
+  if (!isConnectedToMongo) {
+    connectToMongo();
+  }
+    next(); 
+})
+
 app.use("/api/todo", todoItemsRouter);
 
 app.use(errorsController.pageNotFound);
 
-const PORT = 3001;
+module.exports = app;
 
-mongoose.connect(DB_PATH).then(() => {
+// const PORT = 3001;
+
+// mongoose.connect(DB_PATH).then(() => {
   // console.log('Connected to Mongo');
-  app.listen(PORT, () => {
-    console.log(`Server running on address http://localhost:${PORT}`);
-  });
-}).catch(err => {
-  console.log('Error while connecting to Mongo: ', err);
-});
+//   app.listen(PORT, () => {
+//     console.log(`Server running on address http://localhost:${PORT}`);
+//   });
+// }).catch(err => {
+//   console.log('Error while connecting to Mongo: ', err);
+// });
