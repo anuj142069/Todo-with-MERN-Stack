@@ -17,42 +17,42 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
-let isConnectedToMongo = false;
+// let isConnectedToMongo = false;
 
-async function connectToMongo() {
-  try {
-    await mongoose.connect(process.env.DB_PATH, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }); 
-    isConnectedToMongo = true;
-    console.log('Connected to Mongo');
-  }catch (err) {
-    console.log('Error while connecting to Mongo: ', err);
-    // setTimeout(connectToMongo, 5000);
-  }
-}
+// async function connectToMongo() {
+//   try {
+//     await mongoose.connect(process.env.DB_PATH, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     }); 
+//     isConnectedToMongo = true;
+//     console.log('Connected to Mongo');
+//   }catch (err) {
+//     console.log('Error while connecting to Mongo: ', err);
+//     setTimeout(connectToMongo, 5000);
+//   }
+// }
 
-app.use((req, res, next) => {
-  if (!isConnectedToMongo) {
-    connectToMongo();
-  }
-    next(); 
-})
+// app.use((req, res, next) => {
+//   if (!isConnectedToMongo) {
+//     connectToMongo();
+//   }
+//     next(); 
+// })
 
 app.use("/api/todo", todoItemsRouter);
 
 app.use(errorsController.pageNotFound);
 
-module.exports = app;
+// module.exports = app;
 
-// const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-// mongoose.connect(DB_PATH).then(() => {
-  // console.log('Connected to Mongo');
-//   app.listen(PORT, () => {
-//     console.log(`Server running on address http://localhost:${PORT}`);
-//   });
-// }).catch(err => {
-//   console.log('Error while connecting to Mongo: ', err);
-// });
+mongoose.connect(DB_PATH).then(() => {
+  console.log('Connected to Mongo');
+  app.listen(PORT, () => {
+    console.log(`Server running on address http://localhost:${PORT}`);
+  });
+}).catch(err => {
+  console.log('Error while connecting to Mongo: ', err);
+});

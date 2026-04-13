@@ -1,5 +1,5 @@
 export const addItemToServer = async (task, date) => {
-  const response = await fetch("todo-with-mern-stack-lk3n.vercel.app/api/todo", {
+  const response = await fetch("http://localhost:3001/api/todo", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,14 +11,14 @@ export const addItemToServer = async (task, date) => {
 };
 
 export const getItemsFromServer = async () => {
-  const response = await fetch("todo-with-mern-stack-lk3n.vercel.app/api/todo");
+  const response = await fetch("http://localhost:3001/api/todo");
   const items = await response.json();
   return items.map(mapServerItemToLocalItem);
 };
 
 export const markItemCompletedOnServer = async (id) => {
   const response = await fetch(
-    `todo-with-mern-stack-lk3n.vercel.app/${id}/completed`,
+    `http://localhost:3001/api/todo/${id}/completed`,
     {
       method: "PUT",
     }
@@ -28,7 +28,7 @@ export const markItemCompletedOnServer = async (id) => {
 };
 
 export const deleteItemFromServer = async (id) => {
-  await fetch(`todo-with-mern-stack-lk3n.vercel.app/api/todo/${id}`, {
+  await fetch(`http://localhost:3001/api/todo/${id}`, {
     method: "DELETE",
   });
   return id;
@@ -44,3 +44,6 @@ const mapServerItemToLocalItem = (serverItem) => {
     updatedAt: serverItem.updatedAt,
   };
 };
+
+// vercel link :-
+// todo-with-mern-stack-lk3n.vercel.app
