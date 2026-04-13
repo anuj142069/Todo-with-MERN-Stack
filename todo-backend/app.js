@@ -4,7 +4,7 @@ const path = require('path');
 // External Module
 const express = require('express');
 const { default: mongoose } = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 const DB_PATH = "mongodb+srv://user:anuj142069@cluster0.mryid43.mongodb.net/todo";
 
 //Local Module
@@ -15,29 +15,29 @@ const app = express();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
-let isConnectedToMongo = false;
+// let isConnectedToMongo = false;
 
-async function connectToMongo() {
-  try {
-    await mongoose.connect(process.env.DB_PATH, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }); 
-    isConnectedToMongo = true;
-    console.log('Connected to Mongo');
-  }catch (err) {
-    console.error('Error while connecting to Mongo: ', err);
-  }
-}
+// async function connectToMongo() {
+//   try {
+//     await mongoose.connect(process.env.DB_PATH, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     }); 
+//     isConnectedToMongo = true;
+//     console.log('Connected to Mongo');
+//   }catch (err) {
+//     console.error('Error while connecting to Mongo: ', err);
+//   }
+// }
 
-app.use((req, res, next) => {
-  if (!isConnectedToMongo) {
-    connectToMongo();
-  }
-    next(); 
-})
+// app.use((req, res, next) => {
+//   if (!isConnectedToMongo) {
+//     connectToMongo();
+//   }
+//     next(); 
+// })
 
 app.use("/api/todo", todoItemsRouter);
 
