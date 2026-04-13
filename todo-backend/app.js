@@ -28,8 +28,7 @@ async function connectToMongo() {
     isConnectedToMongo = true;
     console.log('Connected to Mongo');
   }catch (err) {
-    console.log('Error while connecting to Mongo: ', err);
-    setTimeout(connectToMongo, 5000);
+    console.error('Error while connecting to Mongo: ', err);
   }
 }
 
