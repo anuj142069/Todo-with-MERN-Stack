@@ -1,5 +1,5 @@
 {
-  "versin": 2,
+  "versin": 3,
   "builds": [
     {
       "src": "app.js",
