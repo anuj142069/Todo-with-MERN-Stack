@@ -48,11 +48,11 @@ module.exports = app;
 
 // const PORT = process.env.PORT || 3001;
 
-// mongoose.connect(DB_PATH).then(() => {
-//   console.log('Connected to Mongo');
-//   app.listen(PORT, () => {
-//     console.log(`Server running on address http://localhost:${PORT}`);
-//   });
-// }).catch(err => {
-//   console.log('Error while connecting to Mongo: ', err);
-// });
+mongoose.connect(DB_PATH).then(() => {
+  console.log('Connected to Mongo');
+  // app.listen(PORT, () => {
+  //   console.log(`Server running on address http://localhost:${PORT}`);
+  // });
+}).catch(err => {
+  console.log('Error while connecting to Mongo: ', err);
+});
