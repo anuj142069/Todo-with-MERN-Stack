@@ -4,7 +4,7 @@ const path = require('path');
 // External Module
 const express = require('express');
 const { default: mongoose } = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 const DB_PATH = "mongodb+srv://user:anuj142069@cluster0.mryid43.mongodb.net/todo";
 
 //Local Module
@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 
 let isConnectedToMongo = false;
 
